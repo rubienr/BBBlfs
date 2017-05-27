@@ -142,8 +142,10 @@ then
 		fi
 		echo
 		echo "Resizing partitons now, just as a saefty measure if you flash 2GB image on 4GB board!"
-		#echo -e "d\n2\nn\np\n2\n\n\nw" | sudo fdisk /dev/$bbb > /dev/null # there is no second partition
+		# there may be images having no 2nd partition:
+		#echo -e "d\n2\nn\np\n2\n\n\nw" | sudo fdisk /dev/$bbb > /dev/null 
 		sudo e2fsck -f /dev/${bbb}1
+		# todo: resize partition, then resize2fs
 		sudo resize2fs /dev/${bbb}1
 		echo
         echo "Please remove power from your board and plug it again."\
