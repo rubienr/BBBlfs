@@ -139,12 +139,12 @@ then
 			sudo ./bbb-armhf.sh $bbb $input
 		else
 			xzcat $input | sudo dd of=/dev/$bbb bs=1M
-			echo
-			echo "Resizing partitons now, just as a saefty measure if you flash 2GB image on 4GB board!"
-			echo -e "d\n2\nn\np\n2\n\n\nw" | sudo fdisk /dev/$bbb > /dev/null
 		fi
-		sudo e2fsck -f /dev/${bbb}2
-		sudo resize2fs /dev/${bbb}2
+		echo
+		echo "Resizing partitons now, just as a saefty measure if you flash 2GB image on 4GB board!"
+		#echo -e "d\n2\nn\np\n2\n\n\nw" | sudo fdisk /dev/$bbb > /dev/null # there is no second partition
+		sudo e2fsck -f /dev/${bbb}1
+		sudo resize2fs /dev/${bbb}1
 		echo
         echo "Please remove power from your board and plug it again."\
 				"You will boot in the new OS!"
